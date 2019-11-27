@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+
+  app_v01:
+    image: user:v_01
+    user: root
+
+  #command: echo $USER

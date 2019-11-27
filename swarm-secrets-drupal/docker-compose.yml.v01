@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+
+  drupal:
+    image: drupal:latest
+    ports:
+     - '8080:80'
+    volumes: 
+     - /var/www/html/modules
+     - /var/www/html/profiles
+     - /var/www/html/themes
+     - /var/www/html/sites
+    restart: always 
+
+
+  postgres:
+    image: postgres:latest
+    environment: 
+      POSTGRES_PASSWORD: gonzo99
+    restart: always 
+
+
+

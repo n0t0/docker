@@ -1,0 +1,35 @@
+version: "3.4"
+services: 
+
+    nginx: 
+        image: nginx:latest
+        ports: 
+            - "80:80"
+        deploy:
+          labels: 
+            com.docker.descr: "this label appears on the service"
+          mode: replicated 
+          replicas: 2
+          resources:
+            limits: 
+              memory: 10M
+            reservations: 
+              cpus: "0.10"
+          restart_policy:
+            condition: on-failure    
+          placement:
+            constraints: 
+              - node.hostname != usav1svdckp2
+              - node.role == worker
+
+    app:
+        image: python:alpine3.7
+        labels:
+          com.docker.descr: "this label appears on all service containers"
+        deploy: 
+          placement:
+            constraints:
+              - node.label.gpu == true 
+          
+
+
